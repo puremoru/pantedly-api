@@ -1,4 +1,14 @@
 class RequirementsController < ApplicationController
+  before_action :get_requirement, only: [:show]
+
+  def index
+    render json: { requirements: Requirement.all.order(created_at: :desc) }
+  end
+
+  def show 
+    render json: { requirement: @requirement }
+  end
+
   def create
     requirement = Requirement.new(requirement_params)
     if requirement.save
@@ -15,5 +25,9 @@ class RequirementsController < ApplicationController
       :initiative, 
       :request_content,
     )
+  end
+
+  def get_requirement
+    @requirement = Requirement.find(params[:id])
   end
 end
