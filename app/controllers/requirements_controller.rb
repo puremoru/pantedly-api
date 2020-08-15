@@ -2,11 +2,11 @@ class RequirementsController < ApplicationController
   before_action :get_requirement, only: [:show]
 
   def index
-    render json: { requirements: Requirement.all.order(created_at: :desc) }
+    render json: { requirements: Requirement.all.order(created_at: :desc) }, status: 200
   end
 
   def show 
-    render json: { requirement: @requirement }
+    render json: { requirement: @requirement }, status: 200
   end
 
   def create
