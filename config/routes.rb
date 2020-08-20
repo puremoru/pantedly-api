@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     end
     resources :requirements, only: [:create, :index, :show]
     resources :companies, only: [:create]
-    resources :users, only: [:update]
+    resources :users, only: [:update, :index]
     post '/interests/requirements/:requirement_id', to: 'interests#create'
   end 
 end
