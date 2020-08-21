@@ -1,6 +1,6 @@
 class Interest < ApplicationRecord
-    belongs_to :users, optional: true
-    belongs_to :requirements, optional: true
+    belongs_to :user, optional: true
+    belongs_to :requirement, optional: true
 
     validates :degree, presence: true
     validates :user_id, :uniqueness => {:scope => :requirement_id}

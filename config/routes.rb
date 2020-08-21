@@ -8,5 +8,6 @@ Rails.application.routes.draw do
     resources :companies, only: [:create]
     resources :users, only: [:update, :index]
     post '/interests/requirements/:requirement_id', to: 'interests#create'
+    post '/entries/requirements/:requirement_id', to: 'entries#create'
   end 
 end
