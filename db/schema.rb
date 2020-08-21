@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_17_104608) do
+ActiveRecord::Schema.define(version: 2020_08_21_151748) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name", null: false
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 2020_08_17_104608) do
     t.string "address2"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "requirement_id"
+    t.text "reason"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["requirement_id"], name: "index_entries_on_requirement_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
   create_table "interests", force: :cascade do |t|
@@ -39,6 +49,7 @@ ActiveRecord::Schema.define(version: 2020_08_17_104608) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "company_id"
+    t.boolean "need_reason", default: false
     t.index ["company_id"], name: "index_requirements_on_company_id"
   end
 
@@ -54,6 +65,8 @@ ActiveRecord::Schema.define(version: 2020_08_17_104608) do
   end
 
   add_foreign_key "interests", "requirements"
+  add_foreign_key "interests", "requirements"
+  add_foreign_key "interests", "users"
   add_foreign_key "interests", "users"
   add_foreign_key "requirements", "companies"
   add_foreign_key "users", "companies"
