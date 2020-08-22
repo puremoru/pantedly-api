@@ -2,7 +2,11 @@ class RequirementsController < ApplicationController
   skip_before_action :authorize_request, only: [:index, :show]
 
   def index
-    render json: { requirements: Requirement.all.order(created_at: :desc) }, status: 200
+    if params[:prefecture] || params[:city]
+      render json: { requirements: Requirement.get_by_address(params[:prefecture], params[:city]) }, status: 200
+    else
+      render json: { requirements: Requirement.all.order(created_at: :desc) }, status: 200
+    end
   end
 
   def show 
