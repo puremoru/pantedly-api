@@ -4,7 +4,7 @@ class Requirement < ApplicationRecord
 
     validates :title, presence: true
 
-    def self.get_by_address(prefecture, city)
+    def self.search_by_address(prefecture, city)
         if prefecture && city
             Company.where(prefecture: prefecture, address1: city).map(&:requirements)
         elsif prefecture && !city
