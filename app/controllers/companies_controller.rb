@@ -9,6 +9,14 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def update
+    if @current_user.company.update(company_params)
+      render json: { message: 'Updated' }, status: 200
+    else
+      render json: { message: 'Bad Request' }, status: 400
+    end
+  end
+
   private
   def company_params 
     params.permit(
