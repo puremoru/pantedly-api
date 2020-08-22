@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_21_151748) do
+ActiveRecord::Schema.define(version: 2020_08_22_115511) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name", null: false
@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(version: 2020_08_21_151748) do
     t.index ["company_id"], name: "index_requirements_on_company_id"
   end
 
+  create_table "scouts", force: :cascade do |t|
+    t.integer "company_id"
+    t.integer "user_id"
+    t.integer "degree"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_scouts_on_company_id"
+    t.index ["user_id"], name: "index_scouts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -69,5 +79,7 @@ ActiveRecord::Schema.define(version: 2020_08_21_151748) do
   add_foreign_key "interests", "users"
   add_foreign_key "interests", "users"
   add_foreign_key "requirements", "companies"
+  add_foreign_key "scouts", "companies"
+  add_foreign_key "scouts", "users"
   add_foreign_key "users", "companies"
 end

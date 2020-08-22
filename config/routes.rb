@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     resources :users, only: [:update, :index]
     post '/interests/requirements/:requirement_id', to: 'interests#create'
     post '/entries/requirements/:requirement_id', to: 'entries#create'
+    post '/scouts/users/:user_id', to: 'scouts#create'
   end 
 end
