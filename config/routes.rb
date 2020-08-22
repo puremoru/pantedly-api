@@ -6,7 +6,10 @@ Rails.application.routes.draw do
     end
     resources :requirements, only: [:create, :index, :show]
     resources :companies, only: [:create]
-    resources :users, only: [:update, :index]
+    resources :users, only: [:index]
+
+    put '/users', to: 'users#update'
+    put '/companies', to: 'companies#update'
     post '/interests/requirements/:requirement_id', to: 'interests#create'
     post '/entries/requirements/:requirement_id', to: 'entries#create'
     post '/scouts/users/:user_id', to: 'scouts#create'
