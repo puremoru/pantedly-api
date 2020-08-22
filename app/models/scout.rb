@@ -1,0 +1,2 @@
+class Scout < ApplicationRecord
+end
