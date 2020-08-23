@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
   before_action :is_recruiter, only: [:index]
   def index
-    render json: { users: User.where(company_id: nil) }, status: 200 # TODO: 並び順をどうするか考える
+    if params[:prefecture] || params[:city]
+      render json: { users: User.search_by_address(params[:prefecture], params[:city]) }, status: 200
+    else
+      render json: { users: User.where(company_id: nil) }, status: 200
+    end
   end
 
   def update
@@ -19,6 +23,10 @@ class UsersController < ApplicationController
       :email,
       :password,
       :about,
+      :postal_code,
+      :prefecture, 
+      :address1,
+      :address2,
     )
   end
 

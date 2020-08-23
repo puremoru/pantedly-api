@@ -7,4 +7,15 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
+
+  def self.search_by_address(prefecture, city)
+    if prefecture && city
+      User.where(company_id: nil, prefecture: prefecture, address1: city)
+    elsif prefecture && !city
+      User.where(company_id: nil, prefecture: prefecture)
+    elsif
+      User.where(company_id: nil, address1: city)
+    end
+
+  end
 end
