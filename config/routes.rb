@@ -5,8 +5,8 @@ Rails.application.routes.draw do
       post '/login', to: 'authentication#login'
     end
     resources :requirements, only: [:create, :index, :show]
-    resources :companies, only: [:create]
-    resources :users, only: [:index]
+    resources :companies, only: [:create, :show]
+    resources :users, only: [:index, :show]
 
     put '/users', to: 'users#update'
     put '/companies', to: 'companies#update'

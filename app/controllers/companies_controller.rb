@@ -1,4 +1,9 @@
 class CompaniesController < ApplicationController
+  skip_before_action :authorize_request, only: [:show]
+  def show
+    render json: { company: company, requirements: company.requirements }, status: 200
+  end
+
   def create
     company = Company.new(company_params)
     if company.save
@@ -26,5 +31,9 @@ class CompaniesController < ApplicationController
       :address1,
       :address2,
     )
+  end
+
+  def company
+    Company.find(params[:id])
   end
 end
