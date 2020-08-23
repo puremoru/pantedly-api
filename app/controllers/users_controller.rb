@@ -20,6 +20,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_collocutors
+    render json: { collocutors: User.get_collocutors(@current_user.id) }, status: 200
+  end
+
   private
   def user_params
     params.permit(

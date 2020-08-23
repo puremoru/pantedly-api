@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show]
 
     put '/users', to: 'users#update'
+    get '/collocutors', to: 'users#get_collocutors'
     put '/companies', to: 'companies#update'
     post '/interests/requirements/:requirement_id', to: 'interests#create'
     post '/entries/requirements/:requirement_id', to: 'entries#create'
