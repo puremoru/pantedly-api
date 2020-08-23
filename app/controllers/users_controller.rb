@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
-  before_action :is_recruiter, only: [:index]
+  before_action :is_recruiter, only: [:index, :show]
   def index
     if params[:prefecture] || params[:city]
       render json: { users: User.search_by_address(params[:prefecture], params[:city]) }, status: 200
     else
       render json: { users: User.where(company_id: nil) }, status: 200
     end
+  end
+
+  def show
+    render json: { user: User.find(params[:id]) }, status: 200
   end
 
   def update
