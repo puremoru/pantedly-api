@@ -20,4 +20,23 @@ class User < ApplicationRecord
     end
 
   end
+
+  def self.get_collocutors(current_user_id)
+    messages = 
+      Message
+      .where(sender_id: current_user_id)
+      .or(
+        Message.where(reciever_id: current_user_id)
+      )
+      .order(created_at: :desc)
+      .includes([:sender, :reciever])
+    
+    messages.map { |message| 
+      if message.sender.id == current_user_id
+        { user: message.reciever, company: message.reciever.company }
+      else
+        { user: message.sender, company: message.sender.company }
+      end
+    }.uniq
+  end
 end
