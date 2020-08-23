@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_23_091601) do
+ActiveRecord::Schema.define(version: 2020_08_23_104749) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,16 @@ ActiveRecord::Schema.define(version: 2020_08_23_091601) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["requirement_id"], name: "index_interests_on_requirement_id"
     t.index ["user_id"], name: "index_interests_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "sender_id", null: false
+    t.integer "reciever_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reciever_id"], name: "index_messages_on_reciever_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "requirements", force: :cascade do |t|
@@ -82,6 +92,8 @@ ActiveRecord::Schema.define(version: 2020_08_23_091601) do
   add_foreign_key "interests", "requirements"
   add_foreign_key "interests", "users"
   add_foreign_key "interests", "users"
+  add_foreign_key "messages", "users", column: "reciever_id"
+  add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "requirements", "companies"
   add_foreign_key "scouts", "companies"
   add_foreign_key "scouts", "users"
