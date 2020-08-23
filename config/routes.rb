@@ -14,5 +14,9 @@ Rails.application.routes.draw do
     post '/entries/requirements/:requirement_id', to: 'entries#create'
     post '/scouts/users/:user_id', to: 'scouts#create'
     post '/messages/to/:reciever_id', to: 'messages#create'
+    scope :messages do
+      get '/', to: 'messages#index'
+      post '/to/:reciever_id', to: 'messages#create'
+    end
   end 
 end
